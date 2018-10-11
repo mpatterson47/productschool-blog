@@ -1,0 +1,29 @@
+Adding comments
+
+- generate a migration: create_comments
+    - user_id (integer)
+    - body (text)
+    - post_id (integer)
+
+- create a Comment model
+    - move the index of comments to posts#show
+        - controller
+            - load only comments for a single post
+            - move logic from comments#index to posts#show
+   - views
+        - move contents of comments/index.html.erb to posts/show.html.erb
+    - move the new comment form to posts#show 
+        - autopopulate the post_id
+    - pick the user for the comment with a drop-down
+
+Options in Rails:
+Migration -- just the migration
+Model -- model + migration
+Controller -- controller + views + routes
+Resource -- model + controller
+Scaffold -- migration + model + controller + views + routes
+Scaffold_controller -- controller + views + routes (what's the difference with controller?)
+
+Let's try scaffold and customize it.
+
+rails generate scaffold comment user:references post:references body:text --no-jbuilder --pretend
