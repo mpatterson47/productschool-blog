@@ -1,15 +1,16 @@
-<h1>My Awesome Blog!</h1>
-
-<p>Welcome to my blog. :)</p>
-
-<p>Here are some recent posts:</p>
-
-<p>There are this many posts: <%= @posts.size %></p>
-
-<ul>
-    <% @posts.each do |post| %>
-        <li><%= link_to post.title, post_path(post) %></li>
+<% @posts.each do |post| %>
+    <div class="card mb-4 %>"
+        <div class="card-body">
+          <div class="card-body">
+              <h5 class="card-title"><%= post.title -%></h5>
+    
+    <% if post.user %>
+        <h6 class=card-subtitle mb-2 text-muted"><%= post.user.full_name %></h6>
     <% end %>
-</ul>
-
-<%= button_to "Add post", new_post_path, method: :get %>
+    
+    <p class="card-text"><%= truncate post.body %></p>
+    
+    <%= link_to "Read more", post_path(post) %>
+  </div>
+</div>
+<% end %>
