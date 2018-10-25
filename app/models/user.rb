@@ -1,5 +1,7 @@
 class User < ActiveRecord::Base
     	DRIVING_AGE_LIMIT = 16
+    	
+    has_secure_password
 
     def full_name
 		"#{first_name} #{last_name}"
