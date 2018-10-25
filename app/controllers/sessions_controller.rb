@@ -13,31 +13,29 @@ class SessionsController < ApplicationController
             return
         end
         
-    # Ensure that a user exists for that email
-    user = User.find_by email: params[:email]
+        # Ensure that a user exists for that email
+        user = User.find_by email: params[:email]
+
+        if user.present?
+            if user.authenticate(params[:password])
+                session[:current_user_id] = user.id
+                redirect_to root_path, notice: "Welcome back, #{user.first_name}!"
+            else
+              flash[:alert] = "Email/password not found"
+              render :new
+            end
     
-    if user.blank?
-        flash[:alert] = "Email/password not found"
-        render :new
+        else
+            flash[:alert] = "Email/password not found"
+            render :new
+        end
     end
-    
-    user = User.find_by email: params[:email]
-    
-    if user.present?
-        session[:current_user_id] = user.id
-        redirect_to root_path, notice: "Welcome back, #{@user.first_name}!"
-    
-    else
-        flash[:alert] = "Email/password not found"
-        render :new
-    end
-        
-        
-        
-    end
+
     
     # Logging out
     def destroy
+        session[:current_user_id] = nil
+        redirect_to root_path, notice: "Good-bye for now"
     end
     
 end

@@ -1,14 +1,14 @@
 <%= form_tag sessions_path do %>
     <label>
         Email
-        <%= text_field_tag :email %>
+        <%= text_field_tag :email, params[:email], class: "form-control" %>
     </label>
    <label>
        Password
-        <%= password_field_tag :password %>
+        <%= password_field_tag :password, " ", class: "form-control" %>
     </label>
     
-    <%= submit_tag :"Sign in" %>
+    <%= submit_tag :"Sign in", class: "btn btn-primary" %>
     </label>
 
 
