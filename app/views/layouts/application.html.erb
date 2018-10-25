@@ -30,7 +30,20 @@
   </nav>
     <div class="row">
        <div class="col-sm-10">
-    <%= yield %>
+        <% if notice %>    
+          <div class="alert alert-success" role="alert">
+            <%= notice %>
+          </div>
+        <% end %>
+    
+        <% if alert %>
+          <div class="alert alert-danger" role="alert">
+            <%= alert %>
+          </div>
+        <% end %>
+        
+        <%= yield %>
+                
       </div>
       <div class="col-sm-2">
         <img src="https://via.placeholder.com/400x800" class=img-fluid>

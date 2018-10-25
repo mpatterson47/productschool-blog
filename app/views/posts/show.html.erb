@@ -2,7 +2,6 @@
 
 <p>
     <%= @post.body %>
-    
 </p>
 
 <p>
@@ -16,31 +15,27 @@
 
 <p id="notice"><%= notice %></p>
 
-<h1>Listing Comments</h1>
+<h3>Comments</h3>
 
-<table>
-  <thead>
-    <tr>
-      <th>User</th>
-      <th>Post</th>
-      <th>Body</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+  <% @comments.each do |comment| %>
+    <div class="card mb-4">
+        <div class="card-body">
+          <% if comment.user %>
+            <h6 class="card-title mb-2 text-muted"><%= comment.user.full_name %></h6>
+          <% end %>
+          <p class="card-text"><%= comment.body %></p>
+        </div>
+        <div class="card-footer">
+          <small class="text-muted">Last updated 3 mins ago</small>
+          <div>
+            <%= link_to 'Edit', edit_comment_path(comment) %>
+            <%= link_to 'Destroy', comment, method: :delete, data: { confirm: 'Are you sure?' } %>
+          </div>
+      </div>
+    </div>
 
-  <tbody>
-    <% @comments.each do |comment| %>
-      <tr>
-        <td><%= comment.user %></td>
-        <td><%= comment.post %></td>
-        <td><%= comment.body %></td>
-        <td><%= link_to 'Show', comment %></td>
-        <td><%= link_to 'Edit', edit_comment_path(comment) %></td>
-        <td><%= link_to 'Destroy', comment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+  <% end %>
+
 
 <br>
 
