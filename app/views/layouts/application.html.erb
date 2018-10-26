@@ -65,11 +65,20 @@
       </div>
       <div class="col-sm-2">
         <div id="weather"><!--This content will be loaded async --></div>
+        
         <script>
-          $.get('/weather', function(forecastHTML) {
-            var weatherContainer = document.getElementById("weather");
-            weatherContainer.innerHTML = forecastHTML
+        if (navigator && navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(function(position) {
+            var coords = position.coords;
+            var lat = Math.round(coords.latitude * 10000) / 10000
+            var lng = Math.round(coords.longitude * 10000) / 10000
+            
+           $.get('/weather', { lat: lat, lng: lng }, function(forecastHTML) {
+              var weatherContainer = document.getElementById("weather");
+              weatherContainer.innerHTML = forecastHTML
+            })
           })
+        }
         </script>
     </div>
   </div>

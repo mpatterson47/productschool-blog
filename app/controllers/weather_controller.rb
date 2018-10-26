@@ -3,8 +3,10 @@ require 'net/http'
 class WeatherController < ActionController::Base
 
     def forecast
+        lat = params[:lat]
+        lng = params[:lng]
         
-        json = Rails.cache.fetch('forecast', expires_in: 15.minutes) do
+        json = Rails.cache.fetch('forecast:#{lat},#{lng}', expires_in: 15.minutes) do
             uri = URI.parse("https://api.darksky.net/forecast/#{Rails.application.secrets.darksky_api_key}/37.8267,-122.4233")
             http = Net::HTTP.new(uri.host, uri.port)
             http.use_ssl = true
