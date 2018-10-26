@@ -64,7 +64,22 @@
                 
       </div>
       <div class="col-sm-2">
-        <img src="https://via.placeholder.com/400x800" class=img-fluid>
+        <div id="weather"><!--This content will be loaded async --></div>
+        
+        <script>
+        if (navigator && navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(function(position) {
+            var coords = position.coords;
+            var lat = Math.round(coords.latitude * 10000) / 10000
+            var lng = Math.round(coords.longitude * 10000) / 10000
+            
+           $.get('/weather', { lat: lat, lng: lng }, function(forecastHTML) {
+              var weatherContainer = document.getElementById("weather");
+              weatherContainer.innerHTML = forecastHTML
+            })
+          })
+        }
+        </script>
     </div>
   </div>
 </body>

@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   # patch '/posts/:id' => 'posts#update' #update the post using the form data
   # delete 'posts/:id' => 'posts#destroy' # destroy the post
   
+  get '/weather' => 'weather#forecast'
+  
   resources :posts
   resources :users
   resources :comments, except: [:index, :show]
